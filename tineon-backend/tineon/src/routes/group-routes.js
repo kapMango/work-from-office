@@ -22,6 +22,9 @@ const upload = multer({ storage: storage })
 const groupRouter =  express.Router()
 
 groupRouter.post('/insert-group',upload.single('file'),groupControllerObj.insertGroup);
+//groupRouter.get('/get-roles',rolesControllerObj.getRoles);
+groupRouter.post('/delete-group',groupControllerObj.deleteGroup);
+groupRouter.post('/update-group',groupControllerObj.updateGroup);
 
 
 export default groupRouter;

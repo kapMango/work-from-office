@@ -21,31 +21,34 @@ export default class groupModel{
         return rows;
     }
 
-    async insertGroupUsers(req,res){
+    async insertGroupUsers(req,res,group_id){
        
-        var array = JSON.parse(req.body.participants),
-        result = array.map(Object.values);
+        var array = JSON.parse(req.body.participants)
+        let rest = array.map(({user_id, approved_status}) => ({user_id, approved_status}));
 
-        let sql = 'INSERT INTO user_groups(`user_id`,`group_id`,`approved_status`) VALUES  ?';
+        rest.forEach(object => {
+            object.group_id = group_id;
+          });
+       var result = rest.map(Object.values);
+
+        let sql = 'INSERT INTO user_groups(`user_id`,`approved_status`,`group_id`) VALUES  ?';
         db.query(sql, [result], (err, results) => {
             if (err) {
               return res.send(err)
             } 
             return res.status(200).json({ message: 'ok' })
         
-          })
-
-       
+        })
     }
 
-    // async getTeamsList(req) {   
-    //     const rows = await db.query("SELECT * FROM `teams` LIMIT "+ req.query.limit+" OFFSET "+(req.query.page - 1) * req.query.limit);
-    //     return rows[0];
-    // }
+    async getTeamsList(req) {   
+        const rows = await db.query("SELECT * FROM `teams` LIMIT "+ req.query.limit+" OFFSET "+(req.query.page - 1) * req.query.limit);
+        return rows[0];
+    }
 
 
     async deleteGroup(req) {
-        const rows = await db.query("DELETE FROM `teams` WHERE `id`=?", [req.body.team_id]);
+        const rows = await db.query("DELETE FROM `groups` WHERE `id`=?", [req.body.group_id]);
         return rows[0];
     }
 
