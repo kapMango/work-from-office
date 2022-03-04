@@ -6,6 +6,7 @@ import teamsRouter from './routes/teams-routes.js';
 import newsRouter from './routes/news-routes.js';
 import bodyParser from 'body-parser';
 import groupRouter from './routes/group-routes.js';
+import surveyRouter from './routes/survey-routes.js';
 
 
 // Initializing app
@@ -26,6 +27,7 @@ app.use(rolesRouter)
 app.use(teamsRouter)
 app.use(newsRouter)
 app.use(groupRouter)
+app.use(surveyRouter)
 
 
 

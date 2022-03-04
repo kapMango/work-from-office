@@ -5,7 +5,7 @@ export default class DBConnection{
     conn  = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        database: 'tineon',
+        database: 'tineon_second_db',
         password:"",
     });
 }

@@ -41,8 +41,20 @@ export default class groupModel{
         })
     }
 
-    async getTeamsList(req) {   
-        const rows = await db.query("SELECT * FROM `teams` LIMIT "+ req.query.limit+" OFFSET "+(req.query.page - 1) * req.query.limit);
+    async updateGroupUsers(req){
+
+        console.log('test=>',req.body.participants)
+        let array1 = JSON.parse(req.body.participants)
+     
+        array1.forEach((element, index, array) => {
+            console.log(element); // 100, 200, 300
+            console.log(index); // 0, 1, 2
+            console.log(array); // same myArray object 3 times
+        });
+    }
+
+    async getGroupsList(req) {   
+        const rows = await db.query("SELECT * FROM `groups`");
         return rows[0];
     }
 
@@ -54,10 +66,15 @@ export default class groupModel{
 
 
     async updateGroup(req) {
-        const rows = await db.query("UPDATE role SET role_name = ?, updated_at = ? WHERE id = ?", [
+        const rows = await db.query("UPDATE groups SET name=?,description=?,image=?,created_by=?,team_id=?,approved_status=?,created_at=?,updated_at=?", [
             req.body.name,
-            req.body.fullname,
-            req.body.team_id
+            req.body.description,
+            req.file.path,
+            req.body.created_by,
+            req.body.team_id,
+            req.body.approved_status,
+            dateTime.create().format('Y-m-d H:M:S'),
+            dateTime.create().format('Y-m-d H:M:S'),
         ]);
         return rows[0];
     }

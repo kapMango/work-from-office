@@ -10,7 +10,7 @@ export default class groupController{
             if(result[0].insertId){
                 groupModelRef.insertGroupUsers(req,res,result[0].insertId).then((result)=>{
                     res.status(200).json({
-                        message:"Group has been created successfully!",
+                        message:comMsg.groupInertSuccess,
                         status:200
 
                     })
@@ -27,29 +27,54 @@ export default class groupController{
         groupModelRef.deleteGroup(req).then((result)=>{
             res.send({
                 status:200,
-                messsage:comMsg.rolesDeleteSuccess,
+                messsage:comMsg.groupsDeleteSuccess,
                 data:result
             })
         }).catch((error)=>{
             res.send({
                 status:200,
-                messsage:comMsg.rolesDeleteError,
+                messsage:comMsg.groupsDeleteError,
                 error:error
             })
         })
     }
 
     updateGroup(req,res,next){
-        rolesModelRef.updateGroup(req).then((result)=>{
+        groupModelRef.updateGroup(req).then((result)=>{
+
+                
+            groupModelRef.updateGroupUsers(req).then((result)=>{
+                res.send({success:'true'},200)
+            }).catch(()=>{
+
+            })            
+                // res.send({
+                //     status:200,
+                //     messsage:comMsg.groupsUpdateSuccess,
+                //     data:result
+                // })
+           
+            
+        }).catch((error)=>{
             res.send({
                 status:200,
-                messsage:comMsg.rolesUpdateSuccess,
+                messsage:comMsg.groupsUpdateError,
+                error:error.message
+            })
+        })
+    }
+
+    getGroups(req,res,next){
+        groupModelRef.getGroupsList(req).then((result)=>{
+            res.send({
+                status:200,
+                messsage:comMsg.groupsListSuccess,
                 data:result
             })
         }).catch((error)=>{
             res.send({
                 status:200,
-                messsage:comMsg.rolesUpdateError,
+                messsage:comMsg.groupsListError,
                 error:error
             })
         })

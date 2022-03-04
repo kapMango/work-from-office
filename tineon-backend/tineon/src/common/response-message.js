@@ -32,6 +32,15 @@ let responseMessages = {
     rolesDeleteError: 'Roles not deleted! please try again',
     rolesUpdateSuccess: 'Roles has been updated successfully!',
     rolesUpdateError: 'Roles not updated! please try again',
+
+    groupInertSuccess:'Group inserted successfully!',
+    groupInsertValidation:'Group name field is required',
+    groupsListSuccess: 'Group has been fetched successfully!',
+    groupsListError: 'Group not fetch! please try again',
+    groupsDeleteSuccess: 'Group has been deleted successfully!',
+    groupsDeleteError: 'Group not deleted! please try again',
+    groupsUpdateSuccess: 'Group has been updated successfully!',
+    groupsUpdateError: 'Group not updated! please try again',
     
 
     emailError : 'Email field is required!',
