@@ -24,4 +24,15 @@ export default class surveyModel{
         return rows;
     }
 
+
+    async insertSurveyAnswers(req,survey_id){
+        const rows = await db.query('INSERT INTO `survey`(`survey_id`,`survey_answer`,`created_at`,`updated_at`)VALUES(?,?,?,?)', [
+            survey_id,
+            req.body.description,
+            dateTime.create().format('Y-m-d H:M:S'),
+            dateTime.create().format('Y-m-d H:M:S'),
+        ]);
+        return rows;
+    }
+
 } 

@@ -13,18 +13,31 @@ export default class surveyController{
         function(callback){
             console.log('req==>',req.body.title)
             surveyModelRef.insertSurvey(req).then((result)=>{
-                res.status(200).json({
-                    message:"Survey has been created successfully!",
-                    status:200
 
-                })
-            }).catch((e)=>{
+                if(result){
+
+                    callback(null,result[0].insertId)
+                    // res.status(200).json({
+                    //     message:"Survey has been created successfully!",
+                    //     status:200,
+                    //     result:result
+    
+                    // })
+                }
+
+                }).catch((e)=>{
                 res.send(e)
             })
         },
-        function(callback){
+        function(data,callback){
           
+           console.log('data',data)
 
+           surveyModelRef.insertSurveyAnswers(req,data).then((result)=>{
+
+           }).catch((error)=>{
+
+           })
 
         },
         function(){
