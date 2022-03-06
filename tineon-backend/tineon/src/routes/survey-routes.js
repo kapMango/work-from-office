@@ -11,5 +11,7 @@ let surveyControllerObj =  new surveyController();
 const surveyRouter =  express.Router()
 
 surveyRouter.post('/insert-survey',upload.none(),surveyControllerObj.insertSurvey);
+surveyRouter.post('/update-survey',upload.none(),surveyControllerObj.updateSurvey);
+
 
 export default surveyRouter;
