@@ -73,7 +73,7 @@ export default class surveyController{
 
        ])
     }
-
+    
 
     updateSurvey(req,res,next){
         async.waterfall([

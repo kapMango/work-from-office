@@ -23,7 +23,7 @@ export default class surveyModel{
         ]);
         return rows;
     }
-
+      
     async updateSurvey(req){
       
         const rows = await db.query("UPDATE `survey` SET `title`=?,`description`=?,`survey_option`=?,`survey_type`=?,`survey_end_date`=?,`survey_view_option`=?,`survey_addtional_option`=?,`survey_notification_option`=?,`user_id`=?,`club_id`=?,`created_at`=?,`updated_at`=? WHERE id=?", [
